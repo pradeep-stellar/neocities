@@ -1,0 +1,39 @@
+version: 2
+
+project_name: neocities
+
+builds:
+  - id: neocities
+    main: ./cmd/neocities
+    binary: neocities
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+    targets:
+      - go_first_class
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+nfpms:
+  - package_name: neocities
+    homepage: https://github.com/pradeep-stellar/neocities
+    maintainer: Pradeep Gowda
+    description: Command-line client for the Neocities API
+    license: MIT
+    formats:
+      - apk
+      - deb
+      - rpm
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
